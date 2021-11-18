@@ -3,7 +3,6 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const multer = require('multer');
-const cors = require('cors');
 
 const FILE_TYPE_MAP = {
     'image/png': 'png',
@@ -11,8 +10,7 @@ const FILE_TYPE_MAP = {
     'image/jpg': 'jpg'
 };
 
-app.options('/', cors())
-app.options('/:id', cors())
+app.options('/products/:id', cors())
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -33,7 +31,7 @@ const storage = multer.diskStorage({
 
 const uploadOptions = multer({ storage: storage });
 
-router.get(`/`, cors(), async (req, res) => {
+router.get(`/`, async (req, res) => {
 
     const JobList = await Job.find();
 
@@ -43,7 +41,7 @@ router.get(`/`, cors(), async (req, res) => {
     res.send(JobList);
 });
 
-router.get(`/:id`, cors(), async (req, res) => {
+router.get(`/:id`, async (req, res) => {
     const job = await Job.findById(req.params.id);
 
     if (!job) {
@@ -52,7 +50,7 @@ router.get(`/:id`, cors(), async (req, res) => {
     res.send(job);
 });
 
-router.post(`/`, cors(), async (req, res) => {
+router.post(`/`, async (req, res) => {
 
     let job = new Job({
         firstName: req.body.firstName,
