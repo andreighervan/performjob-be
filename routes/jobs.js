@@ -62,7 +62,10 @@ router.post(`/`, async (req, res) => {
         salary: req.body.salary,
         experience: req.body.experience,
         qualification: req.body.qualification,
-        level: req.body.level
+        level: req.body.level,
+        city: req.body.city,
+        town: req.body.town,
+        jobDescription: req.body.jobDescription
     });
 
     job = await job.save();

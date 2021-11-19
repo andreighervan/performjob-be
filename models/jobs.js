@@ -49,6 +49,18 @@ const jobsSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    city: {
+        type: String,
+        required: true
+    },
+    town: {
+        type: String,
+        required: true
+    },
+    jobDescription: {
+        type: String,
+        required: true
+    },
     dateCreated: {
         type: Date,
         default: Date.now,
