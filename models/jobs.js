@@ -10,7 +10,7 @@ const jobsSchema = mongoose.Schema({
         required: true
     },
     vacanciesNumber: {
-        type: number,
+        type: Number,
         required: true
     },
     city: {
