@@ -50,16 +50,24 @@ const jobsSchema = mongoose.Schema({
         required: true
     },
     keywords: [{
-        type: String,
-        required: true
+        display: {
+            type: String
+        },
+        value: {
+            type: String
+        }
     }],
     carrerLevel: {
         type: String,
         required: true
     },
     spokenLanguages: [{
-        type: String,
-        required: true
+        display: {
+            type: String
+        },
+        value: {
+            type: String
+        }
     }],
     shouldKnowAllLanguages: {
         type: Boolean,
