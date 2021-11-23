@@ -51,21 +51,24 @@ router.get(`/:id`, async (req, res) => {
 router.post(`/`, async (req, res) => {
 
     let job = new Job({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        phone: req.body.phone,
         companyName: req.body.companyName,
         jobTitle: req.body.jobTitle,
-        jobType: req.body.jobType,
-        jobCategory: req.body.jobCategory,
-        salary: req.body.salary,
-        experience: req.body.experience,
-        qualification: req.body.qualification,
-        level: req.body.level,
+        vacanciesNumber: req.body.vacanciesNumber,
         city: req.body.city,
         town: req.body.town,
-        jobDescription: req.body.jobDescription
+        employmentType: req.body.employmentType,
+        salary: req.body.salary,
+        isConfidential: req.body.isConfidential,
+        isRemoteJob: req.body.isRemoteJob,
+        hasJobRelocation: req.body.hasJobRelocation,
+        isPartiallyRemoteJob: req.body.isPartiallyRemoteJob,
+        jobDescription: req.body.jobDescription,
+        keywords: req.body.keywords,
+        carrerLevel: req.body.carrerLevel,
+        spokenLanguages: req.body.spokenLanguages,
+        shouldKnowAllLanguages: req.body.shouldKnowAllLanguages,
+        interviewQuestions: req.body.interviewQuestions,
+        additionalAddress: req.body.additionalAddress
     });
 
     job = await job.save();

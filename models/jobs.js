@@ -1,52 +1,16 @@
 const mongoose = require('mongoose');
 
 const jobsSchema = mongoose.Schema({
-    firstName: {
-        type: String,
-        required: true,
-    },
-    lastName: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true
-    },
-    phone: {
-        type: Number,
-        required: true
-    },
     companyName: {
         type: String,
-        required: true
+        required: true,
     },
     jobTitle: {
         type: String,
         required: true
     },
-    jobType: {
-        type: String,
-        required: true
-    },
-    jobCategory: {
-        type: String,
-        required: true
-    },
-    salary: {
-        type: String,
-        required: true
-    },
-    experience: {
-        type: String,
-        required: true
-    },
-    qualification: {
-        type: String,
-        required: true
-    },
-    level: {
-        type: String,
+    vacanciesNumber: {
+        type: number,
         required: true
     },
     city: {
@@ -57,10 +21,56 @@ const jobsSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    employmentType: {
+        type: String,
+        required: true
+    },
+    salary: {
+        type: Number,
+        required: true
+    },
+    isConfidential: {
+        type: Boolean,
+        default: false
+    },
+    isRemoteJob: {
+        type: Boolean,
+        default: false
+    },
+    hasJobRelocation: {
+        type: Boolean,
+        default: false
+    },
+    isPartiallyRemoteJob: {
+        type: Boolean,
+        default: false
+    },
     jobDescription: {
         type: String,
         required: true
     },
+    keywords: [{
+        type: String,
+        required: true
+    }],
+    carrerLevel: {
+        type: String,
+        required: true
+    },
+    spokenLanguages: [{
+        type: String,
+        required: true
+    }],
+    shouldKnowAllLanguages: {
+        type: Boolean,
+        default: false
+    },
+    interviewQuestions: [{
+        type: String
+    }],
+    additionalAddress: [{
+        type: String
+    }],
     dateCreated: {
         type: Date,
         default: Date.now,
