@@ -28,11 +28,13 @@ app.use(errorHandler);
 //Routes
 const jobsRoutes = require('./routes/jobs');
 const usersRoutes = require('./routes/users');
+const postsRoutes = require('./routes/posts');
 
 const api = process.env.API_URL;
 
 app.use(`${api}/jobs`, jobsRoutes);
 app.use(`${api}/users`, usersRoutes);
+app.use(`${api}/posts`, postsRoutes);
 
 //Database
 mongoose
