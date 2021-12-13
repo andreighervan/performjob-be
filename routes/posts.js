@@ -4,6 +4,10 @@ const { Category } = require('../models/category');
 const router = express.Router();
 const mongoose = require('mongoose');
 const multer = require('multer');
+const fs = require('fs')
+const util = require('util')
+const unlinkFile = util.promisify(fs.unlink)
+const { uploadFile, getFileStream } = require('../helpers/s3')
 
 const FILE_TYPE_MAP = {
     'image/png': 'png',
@@ -11,7 +15,9 @@ const FILE_TYPE_MAP = {
     'image/jpg': 'jpg'
 };
 
-const storage = multer.diskStorage({
+const uploadOptions = multer({ dest: 'uploads/' })
+
+/* const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         const isValid = FILE_TYPE_MAP[file.mimetype];
         let uploadError = new Error('invalid image type');
@@ -28,7 +34,7 @@ const storage = multer.diskStorage({
     }
 });
 
-const uploadOptions = multer({ storage: storage });
+const uploadOptions = multer({ storage: storage }); */
 
 router.get(`/`, async (req, res) => {
     let filter = {};
@@ -53,20 +59,29 @@ router.get(`/:id`, async (req, res) => {
     res.send(post);
 });
 
+/* app.post('/images', upload.single('image'), async (req, res) => {
+    const file = req.file
+    console.log(file)
+
+    // apply filter
+    // resize 
+
+    const result = await uploadFile(file)
+    await unlinkFile(file.path)
+    console.log(result)
+    const description = req.body.description
+    res.send({ imagePath: `/images/${result.Key}` })
+}) */
+
 router.post(`/`, uploadOptions.single('image'), async (req, res) => {
     const category = await Category.findById(req.body.category);
     if (!category) return res.status(400).send('Invalid Category');
 
-    const file = req.file;
-    if (!file) return res.status(400).send('No image in the request');
-
-    const fileName = file.filename;
-    const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
     let post = new Post({
         name: req.body.name,
         description: req.body.description,
         richDescription: req.body.richDescription,
-        image: `${basePath}${fileName}`, // "http://localhost:3000/public/upload/image-2323232"
+        image: req.body.image,
         category: req.body.category,
         isFeatured: req.body.isFeatured
     });
@@ -78,7 +93,7 @@ router.post(`/`, uploadOptions.single('image'), async (req, res) => {
     res.send(post);
 });
 
-router.put('/:id', uploadOptions.single('image'), async (req, res) => {
+router.put('/:id', async (req, res) => {
     if (!mongoose.isValidObjectId(req.params.id)) {
         return res.status(400).send('Invalid Post Id');
     }
@@ -88,24 +103,13 @@ router.put('/:id', uploadOptions.single('image'), async (req, res) => {
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(400).send('Invalid Post!');
 
-    const file = req.file;
-    let imagepath;
-
-    if (file) {
-        const fileName = file.filename;
-        const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
-        imagepath = `${basePath}${fileName}`;
-    } else {
-        imagepath = post.image;
-    }
-
     const updatedPost = await Post.findByIdAndUpdate(
         req.params.id,
         {
             name: req.body.name,
             description: req.body.description,
             richDescription: req.body.richDescription,
-            image: imagepath,
+            image: req.body.image,
             category: req.body.category,
             isFeatured: req.body.isFeatured
         },
