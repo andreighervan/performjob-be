@@ -66,6 +66,7 @@ router.post(`/`, async (req, res) => {
         keywords: req.body.keywords,
         carrerLevel: req.body.carrerLevel,
         spokenLanguages: req.body.spokenLanguages,
+        companyUrl: req.body.companyUrl,
         shouldKnowAllLanguages: req.body.shouldKnowAllLanguages,
         interviewQuestions: req.body.interviewQuestions,
         additionalAddress: req.body.additionalAddress

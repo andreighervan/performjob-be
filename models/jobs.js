@@ -57,6 +57,10 @@ const jobsSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    companyUrl: {
+        type: String,
+        required: true
+    },
     spokenLanguages: [{
         type: String
     }],
