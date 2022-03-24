@@ -41,6 +41,22 @@ const jobsSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
+    hasMealTickets: {
+        type: String,
+        required: true
+    },
+    hasMedicalInsurance: {
+        type: String,
+        required: true
+    },
+    hasPerformanceBonus: {
+        type: String,
+        required: true
+    },
+    industry: {
+        type: String,
+        required: true
+    },
     isPartiallyRemoteJob: {
         type: Boolean,
         default: false
