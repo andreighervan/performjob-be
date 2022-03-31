@@ -37,6 +37,10 @@ const jobsSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
+    isFavorite: {
+        type: Boolean,
+        default: false
+    },
     hasJobRelocation: {
         type: Boolean,
         default: false

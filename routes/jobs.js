@@ -83,6 +83,30 @@ router.post(`/`, async (req, res) => {
     res.send(job);
 });
 
+router.put('/favorite/:id', async (req, res) => {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+        return res.status(400).send('Invalid Job Id');
+    }
+
+    const job = await Job.findById(req.params.id);
+    if (!job) return res.status(400).send('Invalid Job!');
+
+    const isFavorite = req.body.isFavorite ? true : false
+
+    const updatedJob = await Job.findByIdAndUpdate(
+        req.params.id,
+        {
+            isFavorite
+        }
+    );
+
+    if (!updatedJob) return res.status(500).send('The job cannot be updated!');
+
+    res.send(updatedJob);
+});
+
+//6203e7624f31b31ffae02619
+
 /*router.put('/:id', uploadOptions.single('image'), async (req, res) => {
     if (!mongoose.isValidObjectId(req.params.id)) {
         return res.status(400).send('Invalid Post Id');
