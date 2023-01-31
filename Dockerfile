@@ -1,7 +1,6 @@
 FROM node:16
 
-USER ContainerUser
-WORKDIR "/performjob"
+WORKDIR "D:\performjob.com\performjob.com\performjob-backend"
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
