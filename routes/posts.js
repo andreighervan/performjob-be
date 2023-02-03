@@ -13,7 +13,7 @@ const FILE_TYPE_MAP = {
     'image/jpg': 'jpg'
 };
 
-const uploadOptions = multer({ dest: 'public/uploads/' })
+const uploadOptions = multer({ dest: 'uploads/' })
 
 /* const storage = multer.diskStorage({
     destination: function (req, file, cb) {

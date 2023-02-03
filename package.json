@@ -4,7 +4,7 @@
   "description": "backend of aso-shop",
   "main": "app.js",
   "engines": {
-    "node": "16.13.1"
+    "node": "16.18.1"
   },
   "scripts": {
     "start": "nodemon app.js",
