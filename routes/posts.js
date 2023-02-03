@@ -6,8 +6,6 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const fs = require('fs')
 const util = require('util')
-const unlinkFile = util.promisify(fs.unlink)
-const { uploadFile, getFileStream } = require('../helpers/s3')
 
 const FILE_TYPE_MAP = {
     'image/png': 'png',
@@ -15,7 +13,7 @@ const FILE_TYPE_MAP = {
     'image/jpg': 'jpg'
 };
 
-const uploadOptions = multer({ dest: 'uploads/' })
+const uploadOptions = multer({ dest: 'public/uploads/' })
 
 /* const storage = multer.diskStorage({
     destination: function (req, file, cb) {

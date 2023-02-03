@@ -2,7 +2,6 @@ const { Job } = require('../models/jobs');
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const multer = require('multer');
 
 const FILE_TYPE_MAP = {
     'image/png': 'png',
