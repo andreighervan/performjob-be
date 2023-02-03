@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "name": "performjob",
+    "name": "performjob-be",
     "builds": [
         {
             "src": "app.js",
