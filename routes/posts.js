@@ -13,9 +13,7 @@ const FILE_TYPE_MAP = {
     'image/jpg': 'jpg'
 };
 
-const uploadOptions = multer({ dest: 'uploads/' })
-
-/* const storage = multer.diskStorage({
+const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         const isValid = FILE_TYPE_MAP[file.mimetype];
         let uploadError = new Error('invalid image type');
@@ -32,7 +30,7 @@ const uploadOptions = multer({ dest: 'uploads/' })
     }
 });
 
-const uploadOptions = multer({ storage: storage }); */
+const uploadOptions = multer({ storage: storage });
 
 router.get(`/`, async (req, res) => {
     let filter = {};
